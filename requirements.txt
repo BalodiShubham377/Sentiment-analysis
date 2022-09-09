@@ -1,0 +1,8 @@
+sklearn
+fastapi
+pandas
+pydantic
+tensorflow==2.8.2
+uvicorn
+python-3.8.0
+python-multipart
