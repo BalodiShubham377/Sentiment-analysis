@@ -159,9 +159,11 @@ dataset/
 Scripts/
 include/
 share/
-sentiement.h5
+sentiment.h5
 sentiments.h5 
 sentimentts.h5
+sentiment.h5
+Sentiment.csv
 # pytype static type analyzer
 .pytype/
 
