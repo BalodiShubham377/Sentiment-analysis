@@ -1,4 +1,9 @@
+### import all the dependencies
+
+
+
 import pandas as pd
+
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Sequential
@@ -8,11 +13,18 @@ import re
 
 
 
+## reading the dataset
 
 data = pd.read_csv('Sentiment.csv')
 
 # Keeping only the neccessary columns
+
+
 data = data[['text','sentiment']]
+
+## cleaning the dataset
+
+
 
 
 def preProcess_data(text):
@@ -27,6 +39,8 @@ def preProcess_data(text):
    
 
 data['text'] = data['text'].apply(preProcess_data)
+### tokenizing the dataset
+
 
 max_fatures = 2000
 
@@ -36,8 +50,12 @@ X = tokenizer.texts_to_sequences(data['text'].values)
 X = pad_sequences(X, 50) 
 
 Y = pd.get_dummies(data['sentiment']).values
+
+#### splitting dataset for training Model
+
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.30,random_state = 42)
 
+### Lstm model
 
 embed_dim = 128
 lstm_out = 196
@@ -54,6 +72,11 @@ model.compile(loss = 'categorical_crossentropy', optimizer='adam',metrics = ['ac
 
 batch_size = 512
 
+### Training Model
+
 model.fit(X_train, Y_train, epochs = 15, batch_size=batch_size, validation_data=(X_test, Y_test))
+
+
+
 
 model.save('sentiment1.h5')
