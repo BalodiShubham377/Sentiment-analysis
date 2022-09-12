@@ -47,7 +47,7 @@ max_fatures = 2000
 tokenizer = Tokenizer(num_words=max_fatures, split=' ')
 tokenizer.fit_on_texts(data['text'].values)
 X = tokenizer.texts_to_sequences(data['text'].values)
-X = pad_sequences(X, 28) 
+X = pad_sequences(X, 50) 
 
 Y = pd.get_dummies(data['sentiment']).values
 
